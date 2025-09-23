@@ -120,6 +120,7 @@ def mag_ab(wavelength, spectrum, filters, *, redshift=None, coefficients=None,
         for j, f in np.ndenumerate(filters):
             # create a shifted filter for redshift
             fs = f.create_shifted(z)
+            spectrum, wavelength = fs.pad_spectrum(spectrum, wavelength)
             m[i+(...,)+j] = fs.get_ab_maggies(spectrum, wavelength)
 
     # if interpolating, compute the full set of redshifts
